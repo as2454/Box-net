@@ -20,11 +20,12 @@ public class Main {
     public static int num=0;
     public static void main(String[] args) throws FileNotFoundException, IOException {
         String[] over =/*null;//*/{"live","publish"};
-        HashMap c2=load_config("test.txt",over);//This is just to show we can load it to an object
+        HashMap c2=load_config("C:\\Users\\Anandram\\Desktop\\test.txt",over);//This is just to show we can load it to an object
         //If required this object can be passed as a parameter to the access function to retrieve data
         //from this object rather than the default config variable.
         String a;
-        a=(String) access("CONFIG.ftp.path");
+        a=(String) access("CONFIG.ftp.name");//If the required output is an array
+        //of strings like in params, just use split function to split it at ","
         group ch=(group) access("CONFIG.common");
         System.out.println(a);
         System.out.println(ch.m.get("basic_size_limit"));//We can get a list of keys and iterate
@@ -78,6 +79,8 @@ public class Main {
         String temp;
         while((temp=r.readLine())!=null)
         {
+            if(temp.length()<1)
+                continue;
             if(temp.charAt(0)=='[')
             {
                 if(num>0){
@@ -94,6 +97,7 @@ public class Main {
                 continue;
             }
             else if(temp.length()!=0){
+                System.err.println(temp);
                 String param;
                 String over="";
                 String value;
